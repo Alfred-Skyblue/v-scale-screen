@@ -28,7 +28,13 @@ Vue.use(VScaleScreen)
 
 ```vue
 <v-scale-screen width="1080" height="1920">
-  
+  <div>
+    <v-chart>....</v-chart>
+    <v-chart>....</v-chart>
+    <v-chart>....</v-chart>
+    <v-chart>....</v-chart>
+    <v-chart>....</v-chart>
+  </div>
 </v-scale-screen>
 ```
 
