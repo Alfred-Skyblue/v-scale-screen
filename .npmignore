@@ -1,0 +1,25 @@
+/build/
+/dev/
+node_modules/
+src/
+/.browserslistrc
+/babel.config.js
+*.map
+*.html
+
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
