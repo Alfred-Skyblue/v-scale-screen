@@ -2,8 +2,8 @@
 
 大屏自适应容器组件，可用于大屏项目开发，实现屏幕自适应，可根据宽度自适应，高度自适应，和宽高等比例自适应，全屏自适应（会存在拉伸问题）
 
-仓库地址：[github](https://github.com/Alfred-Skyblue/v-scale-screen)
-国内地址：[gitee](https://gitee.com/yuan_fangY/v-scale-screen)
++ 仓库地址：[github](https://github.com/Alfred-Skyblue/v-scale-screen)
++ 国内地址：[gitee](https://gitee.com/yuan_fangY/v-scale-screen)
 ### 图例
 
 ![图例](./dev/assets/images/scale_screen.gif)
