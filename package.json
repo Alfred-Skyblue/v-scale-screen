@@ -1,7 +1,14 @@
 {
   "name": "v-scale-screen",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "author": {
+    "name": "ypt",
+    "email": "yangpanteng@gmail.com"
+  },
+  "private": false,
+  "license": "MIT",
+  "homepage": "https://github.com/Alfred-Skyblue/v-scale-screen",
+  "description": "vue2.x大屏自适应容器组件",
   "main": "dist/v-scale-screen.ssr.js",
   "browser": "dist/v-scale-screen.esm.js",
   "module": "dist/v-scale-screen.esm.js",
@@ -10,6 +17,13 @@
   "files": [
     "dist/*",
     "src/**/*.vue"
+  ],
+  "keywords": [
+    "vue2.x",
+    "echarts",
+    "大屏自适应",
+    "自适应",
+    "大屏"
   ],
   "sideEffects": false,
   "scripts": {
@@ -21,9 +35,16 @@
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife",
     "postbuild": "rimraf ./dist/types/dev ./dist/types/src/entry.d.ts"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "dependencies": {
     "@vue/composition-api": "^1.4.9",
     "@vueuse/core": "^8.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Alfred-Skyblue/v-scale-screen"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
