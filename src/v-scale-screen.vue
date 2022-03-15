@@ -111,9 +111,7 @@ export default defineComponent({
       const domHeight = screenWrapper.value!.clientHeight
       const currentWidth = document.body.clientWidth
       const currentHeight = document.body.clientHeight
-      // 宽度大于设计稿宽度时，按照比例居中显示
       screenWrapper.value!.style.transform = `scale(${scale},${scale})`
-      // 宽度大于设计稿宽度时，按照比例居中显示
       let mx = Math.max((currentWidth - domWidth * scale) / 2, 0)
       let my = Math.max((currentHeight - domHeight * scale) / 2, 0)
       if (typeof props.autoScale === 'object') {
