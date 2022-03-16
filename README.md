@@ -27,7 +27,7 @@ Vue.use(VScaleScreen)
 ### 使用
 
 ```vue
-<v-scale-screen width="1080" height="1920">
+<v-scale-screen width="1920" height="1080">
   <div>
     <v-chart>....</v-chart>
     <v-chart>....</v-chart>
