@@ -19,15 +19,13 @@ import {
   reactive,
   ref,
 } from '@vue/composition-api'
-import {useEventListener, useDebounceFn, useMutationObserver} from '@vueuse/core'
+import { useEventListener, useDebounceFn, useMutationObserver } from '@vueuse/core'
 interface IState {
   originalWidth: string | number
   originalHeight: string | number
   width?: string | number
   height?: string | number
 }
-
-
 type IAutoScale = boolean | {
   x?:boolean
   y?:boolean
@@ -57,7 +55,8 @@ export default defineComponent({
       default: 500
     }
   },
-  setup(props) {
+  setup(props){
+
     const state = reactive<IState>({
       width: 0,
       height: 0,
@@ -156,12 +155,14 @@ export default defineComponent({
         attributeOldValue:true
       })
     }
-    onMounted(async () => {
-      await initSize()
-      updateSize()
-      updateScale()
-      useEventListener('resize', onResize)
-      initMutationObserver()
+    onMounted( () => {
+      nextTick(async() => {
+        await initSize()
+        updateSize()
+        updateScale()
+        useEventListener('resize', onResize)
+        initMutationObserver()
+      })
     })
 
 
