@@ -1,0 +1,50 @@
+{
+  "name": "v-scale-screen",
+  "private": false,
+  "version": "2.0.0",
+  "author": {
+    "name": "ypt",
+    "email": "yangpanteng@gmail.com"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/Alfred-Skyblue/v-scale-screen",
+  "type": "module",
+  "main": "dist/v-scale-screen.umd.cjs",
+  "module": "dist/v-scale-screen.js",
+  "unpkg": "dist/v-scale-screen.iife.js",
+  "types": "dist/types/index.d.ts",
+  "files": ["dist", "types"],
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "vue3",
+    "echarts",
+    "大屏自适应",
+    "自适应",
+    "大屏"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Alfred-Skyblue/v-scale-screen"
+  },
+  "dependencies": {
+    "@vueuse/core": "^9.1.0",
+    "vue": "^3.2.37"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.6",
+    "@vitejs/plugin-vue": "^3.0.3",
+    "prettier": "^2.7.1",
+    "typescript": "^4.6.4",
+    "vite": "^3.0.7",
+    "vite-plugin-dts": "^1.4.1",
+    "vue-tsc": "^0.39.5"
+  }
+}

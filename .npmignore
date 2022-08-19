@@ -1,0 +1,6 @@
+node_modules/
+src/
+*.html
+
+# Editor directories and files
+.idea
