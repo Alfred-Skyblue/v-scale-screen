@@ -4,8 +4,12 @@
  * @Description: 大屏自适应容器组件
 -->
 <template>
-  <section :style="styles.box" class="v-screen-box">
-    <div :style="styles.wrapper" class="screen-wrapper" ref="screenWrapper">
+  <section :style="{ ...styles.box, ...boxStyle }" class="v-screen-box">
+    <div
+      :style="{ ...styles.wrapper, ...wrapperStyle }"
+      class="screen-wrapper"
+      ref="screenWrapper"
+    >
       <slot></slot>
     </div>
   </section>
@@ -60,6 +64,14 @@ export default defineComponent({
     delay: {
       type: Number as PropType<number>,
       default: 500
+    },
+    boxStyle: {
+      type: Object as PropType<CSSProperties>,
+      default: () => ({})
+    },
+    wrapperStyle: {
+      type: Object as PropType<CSSProperties>,
+      default: () => ({})
     }
   },
   setup(props) {
@@ -88,6 +100,7 @@ export default defineComponent({
         transformOrigin: `left top`
       }
     }
+
     const screenWrapper = ref<HTMLElement>()
     /**
      * 初始化大屏容器宽高

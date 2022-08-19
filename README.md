@@ -87,11 +87,12 @@ export default defineComponent({
 > 注：使用时请将 `body` 样式设置为 `overflow: hidden;`
 > 注：使用时请将 `body` 样式设置为 `overflow: hidden;`
 ### API
-| 属性         | 说明                                                                                     | 类型                               | 默认值                   |
-|------------|----------------------------------------------------------------------------------------|----------------------------------|-----------------------|
-| width      | 大屏宽度                                                                                   | Number                           | String                | 1920 |
-| height     | 大屏高度                                                                                   | Number                           | String                | 1080 |
-| autoScale  | 自适应配置，配置为boolean类型时，为启动或者关闭自适应，配置为对象时，若x为true，x轴产生边距，y为true时，y轴产生边距，启用fullScreen时此配置失效 | Boolean or {x:boolean,y:boolean} | true                     |
-| delay      | 窗口变化防抖延迟时间                                                                             | Number                           | 500                   |
-| fullScreen | 全屏自适应，启用此配置项时会存在拉伸效果，同时autoScale失效，非必要情况下不建议开启                                         | Boolean                          | false                 |
-
+| 属性         | 说明                                                                                   | 类型                               | 默认值    |
+|------------|--------------------------------------------------------------------------------------|----------------------------------|--------|
+| width      | 大屏宽度                                                                                 | Number                           | String | 1920 |
+| height     | 大屏高度                                                                                 | Number                           | String | 1080 |
+| autoScale  | 自适应配置，配置为boolean类型时，为启动或者关闭自适应，配置为对象时，若x为true，x轴产生边距，y为true时，y轴产生边距，启用fullScreen时此配置失效 | Boolean or {x:boolean,y:boolean} | true   |
+| delay      | 窗口变化防抖延迟时间                                                                           | Number                           | 500    |
+| fullScreen | 全屏自适应，启用此配置项时会存在拉伸效果，同时autoScale失效，非必要情况下不建议开启                                       | Boolean                          | false  |
+| boxStyle | 修改容器样式，如居中展示时侧边背景色，符合Vue双向绑定style标准格式                                                | Object                           | null   |
+| wrapperStyle | 修改自适应区域样式，符合Vue双向绑定style标准格式                                                                          | Object                           | null   |
