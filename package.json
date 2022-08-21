@@ -1,6 +1,6 @@
 {
   "name": "v-scale-screen",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "author": {
     "name": "ypt",
     "email": "yangpanteng@gmail.com"
@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@vue/composition-api": "^1.4.9",
-    "@vueuse/core": "^8.0.1"
+    "@vueuse/core": "8.0.1"
   },
   "repository": {
     "type": "git",
@@ -68,8 +68,8 @@
     "rollup-plugin-vue": "^5.1.9",
     "ttypescript": "^1.5.12",
     "typescript": "^4.0.3",
-    "vue": "^2.6.14",
-    "vue-template-compiler": "^2.6.14"
+    "vue": "2.6.14",
+    "vue-template-compiler": "2.6.14"
   },
   "peerDependencies": {
     "vue": "^2.6.14"

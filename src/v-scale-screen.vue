@@ -4,8 +4,8 @@
  * @Description: 大屏自适应容器组件
 -->
 <template>
-  <section class="screen-box">
-    <div class="screen-wrapper" ref="screenWrapper">
+  <section class="screen-box" :style="boxStyle">
+    <div class="screen-wrapper" ref="screenWrapper" :style="wrapperStyle">
       <slot></slot>
     </div>
   </section>
@@ -53,6 +53,14 @@ export default defineComponent({
     delay:{
       type: Number as PropType<number>,
       default: 500
+    },
+    boxStyle: {
+      type: Object,
+      default: () => ({})
+    },
+    wrapperStyle: {
+      type: Object,
+      default: () => ({})
     }
   },
   setup(props){
