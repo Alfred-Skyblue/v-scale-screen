@@ -4,7 +4,7 @@
 
 大屏自适应容器组件，可用于大屏项目开发，实现屏幕自适应，可根据宽度自适应，高度自适应，和宽高等比例自适应，全屏自适应（会存在拉伸问题）
 
-> 注：vue2请使用0.1.1版本，vue3请使用1.0.0以上版本
+> 注：vue2请使用1.x版本，vue3请使用2.0以上以上版本
 
 + 仓库地址：[github](https://github.com/Alfred-Skyblue/v-scale-screen)
 + 国内地址：[gitee](https://gitee.com/yuan_fangY/v-scale-screen)
@@ -20,11 +20,11 @@
 ### 安装
 
 ```bash
-npm install v-scale-screen@0.1.1
+npm install v-scale-screen
 # or 
-yarn add v-scale-screen@0.1.1
+yarn add v-scale-screen
 ```
-> 注：vue2请使用0.1.1版本、vue2请使用0.1.1版本、vue2请使用0.1.1版本，重要的事情说三遍
+> 注：vue2请使用1.x版本、vue2请使用1.x版本、vue2请使用1.x版本，重要的事情说三遍
 
 #### vue2
 
