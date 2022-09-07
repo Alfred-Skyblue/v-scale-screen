@@ -1,7 +1,7 @@
 {
   "name": "v-scale-screen",
   "private": false,
-  "version": "2.0.11",
+  "version": "2.0.12",
   "author": {
     "name": "ypt",
     "email": "yangpanteng@gmail.com"
@@ -13,7 +13,10 @@
   "module": "dist/v-scale-screen.js",
   "unpkg": "dist/v-scale-screen.iife.js",
   "types": "dist/types/index.d.ts",
-  "files": ["dist", "types"],
+  "files": [
+    "dist",
+    "types"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -35,7 +38,9 @@
     "url": "https://github.com/Alfred-Skyblue/v-scale-screen"
   },
   "dependencies": {
-    "@vueuse/core": "^9.1.0",
+    "vue": "^3.2.37"
+  },
+  "peerDependencies": {
     "vue": "^3.2.37"
   },
   "devDependencies": {

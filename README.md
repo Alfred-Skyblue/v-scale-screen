@@ -6,6 +6,9 @@
 
 > 注：vue2请使用1.x版本，vue3请使用2.0以上以上版本
 
++ 版本变更
+> 已修复 vue2.7 不兼容功能，现阶段 v-scale-screen@1.0.2 支持vue2.6.x和vue2.7.x所有版本，vue3 请使用 v-scale-screen@2.0.12 版本
+
 + 仓库地址：[github](https://github.com/Alfred-Skyblue/v-scale-screen)
 + 国内地址：[gitee](https://gitee.com/yuan_fangY/v-scale-screen)
 ### 图例

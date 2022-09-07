@@ -20,20 +20,38 @@ import {
   defineComponent,
   nextTick,
   onMounted,
+  onUnmounted,
   PropType,
   reactive,
   ref
 } from 'vue'
-import {
-  useEventListener,
-  useDebounceFn,
-  useMutationObserver
-} from '@vueuse/core'
+
+/**
+ * 防抖函数
+ * @param {T} fn
+ * @param {number} delay
+ * @returns {() => void}
+ */
+function debounce<T>(fn: T, delay: number): () => void {
+  let timer: NodeJS.Timeout
+  return function (...args: any[]): void {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(
+      () => {
+        typeof fn === 'function' && fn.apply(null, args)
+        clearTimeout(timer)
+      },
+      delay > 0 ? delay : 100
+    )
+  }
+}
+
 interface IState {
   originalWidth: string | number
   originalHeight: string | number
   width?: string | number
   height?: string | number
+  observer: null | MutationObserver
 }
 type IAutoScale =
   | boolean
@@ -79,7 +97,8 @@ export default defineComponent({
       width: 0,
       height: 0,
       originalWidth: 0,
-      originalHeight: 0
+      originalHeight: 0,
+      observer: null
     })
 
     const styles: Record<string, CSSProperties> = {
@@ -177,32 +196,33 @@ export default defineComponent({
       autoScale(scale)
     }
 
-    const onResize = useDebounceFn(async () => {
+    const onResize = debounce(async () => {
       await initSize()
       updateSize()
       updateScale()
     }, props.delay)
     const initMutationObserver = () => {
-      useMutationObserver(
-        screenWrapper,
-        () => {
-          onResize()
-        },
-        {
-          attributes: true,
-          attributeFilter: ['style'],
-          attributeOldValue: true
-        }
-      )
+      const observer = (state.observer = new MutationObserver(() => {
+        onResize()
+      }))
+      observer.observe(screenWrapper.value!, {
+        attributes: true,
+        attributeFilter: ['style'],
+        attributeOldValue: true
+      })
     }
     onMounted(() => {
       nextTick(async () => {
         await initSize()
         updateSize()
         updateScale()
-        useEventListener('resize', onResize)
+        window.addEventListener('resize', onResize)
         initMutationObserver()
       })
+    })
+    onUnmounted(() => {
+      window.removeEventListener('resize', onResize)
+      state.observer?.disconnect()
     })
 
     return { screenWrapper, styles }
