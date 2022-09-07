@@ -184,6 +184,7 @@ export default Vue.extend({
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize!)
+    this.observer?.disconnect()
   }
 })
 //
