@@ -1,6 +1,6 @@
 {
   "name": "v-scale-screen",
-  "version": "1.0.0",
+  "version": "0.1.2",
   "author": {
     "name": "ypt",
     "email": "yangpanteng@gmail.com"
@@ -38,10 +38,7 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "dependencies": {
-    "@vue/composition-api": "^1.4.9",
-    "@vueuse/core": "8.0.1"
-  },
+  "dependencies": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/Alfred-Skyblue/v-scale-screen"

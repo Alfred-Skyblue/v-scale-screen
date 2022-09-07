@@ -11,46 +11,55 @@
   </section>
 </template>
 <script lang="ts">
-import {
-  defineComponent,
-  nextTick,
-  onMounted,
-  PropType,
-  reactive,
-  ref,
-} from '@vue/composition-api'
-import { useEventListener, useDebounceFn, useMutationObserver } from '@vueuse/core'
-interface IState {
-  originalWidth: string | number
-  originalHeight: string | number
-  width?: string | number
-  height?: string | number
-}
-type IAutoScale = boolean | {
-  x?:boolean
-  y?:boolean
+import Vue, { PropType } from 'vue'
+
+type IAutoScale =
+  | boolean
+  | {
+      x?: boolean
+      y?: boolean
+    }
+
+/**
+ * 防抖函数
+ * @param {T} fn
+ * @param {number} delay
+ * @returns {() => void}
+ */
+function debounce<T>(fn: T, delay: number): () => void {
+  let timer: NodeJS.Timeout
+  return function (...args: any[]): void {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(
+      () => {
+        typeof fn === 'function' && fn.apply(null, args)
+        clearTimeout(timer)
+      },
+      delay > 0 ? delay : 100
+    )
+  }
 }
 
-export default defineComponent({
+export default Vue.extend({
   name: 'VScaleScreen',
   props: {
-    width:{
+    width: {
       type: [String, Number] as PropType<string | number>,
       default: 1920
     },
-    height:{
+    height: {
       type: [String, Number] as PropType<string | number>,
       default: 1080
     },
-    fullScreen:{
+    fullScreen: {
       type: Boolean as PropType<boolean>,
       default: false
     },
     autoScale: {
-      type: [Object,Boolean] as PropType<IAutoScale>,
+      type: [Object, Boolean] as PropType<IAutoScale>,
       default: true
     },
-    delay:{
+    delay: {
       type: Number as PropType<number>,
       default: 500
     },
@@ -63,116 +72,118 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup(props){
-
-    const state = reactive<IState>({
-      width: 0,
-      height: 0,
+  data() {
+    return {
+      currentWidth: 0,
+      currentHeight: 0,
       originalWidth: 0,
-      originalHeight: 0
-    })
-    const screenWrapper = ref<HTMLElement>()
-    /**
-     * 初始化大屏容器宽高
-     */
-    const initSize = () => {
+      originalHeight: 0,
+      onResize: null as null | (() => void),
+      observer: null as null | MutationObserver
+    }
+  },
+  methods: {
+    initSize() {
       return new Promise<void>(resolve => {
-        nextTick(() => {
+        this.$nextTick(() => {
           // region 获取大屏真实尺寸
-          if (props.width && props.height) {
-            state.width = props.width
-            state.height = props.height
+          if (this.width && this.height) {
+            this.currentWidth = this.width as number
+            this.currentHeight = this.height as number
           } else {
-            state.width = screenWrapper.value?.clientWidth
-            state.height = screenWrapper.value?.clientHeight
+            const screenWrapper = this.$refs['screenWrapper'] as HTMLElement
+            this.currentWidth = screenWrapper?.clientWidth
+            this.currentHeight = screenWrapper?.clientHeight
           }
           // endregion
 
           // region 获取画布尺寸
-          if (!state.originalHeight || !state.originalWidth) {
-            state.originalWidth = window.screen.width
-            state.originalHeight = window.screen.height
+          if (!this.originalHeight || !this.originalWidth) {
+            this.originalWidth = window.screen.width
+            this.originalHeight = window.screen.height
           }
           // endregion
           resolve()
         })
       })
-    }
-
-    /**
-     * 更新大屏容器宽高
-     */
-    const updateSize = () => {
-      if (state.width && state.height) {
-        screenWrapper.value!.style.width = `${state.width}px`
-        screenWrapper.value!.style.height = `${state.height}px`
+    },
+    updateSize() {
+      const screenWrapper = this.$refs['screenWrapper'] as HTMLElement
+      if (this.currentWidth && this.currentHeight) {
+        screenWrapper.style.width = `${this.currentWidth}px`
+        screenWrapper.style.height = `${this.currentHeight}px`
       } else {
-        screenWrapper.value!.style.width = `${state.originalWidth}px`
-        screenWrapper.value!.style.height = `${state.originalHeight}px`
+        screenWrapper.style.width = `${this.originalWidth}px`
+        screenWrapper.style.height = `${this.originalHeight}px`
       }
-    }
-
-    const autoScale = (scale:number) => {
-      if (!props.autoScale) return
-      const domWidth = screenWrapper.value!.clientWidth
-      const domHeight = screenWrapper.value!.clientHeight
+    },
+    handleAutoScale(scale: number) {
+      if (!this.autoScale) return
+      const screenWrapper = this.$refs['screenWrapper'] as HTMLElement
+      const domWidth = screenWrapper.clientWidth
+      const domHeight = screenWrapper.clientHeight
       const currentWidth = document.body.clientWidth
       const currentHeight = document.body.clientHeight
-      screenWrapper.value!.style.transform = `scale(${scale},${scale})`
+      screenWrapper.style.transform = `scale(${scale},${scale})`
       let mx = Math.max((currentWidth - domWidth * scale) / 2, 0)
       let my = Math.max((currentHeight - domHeight * scale) / 2, 0)
-      if (typeof props.autoScale === 'object') {
-        !props.autoScale.x && (mx = 0)
-        !props.autoScale.y && (my = 0)
+      if (typeof this.autoScale === 'object') {
+        // @ts-ignore
+        !this.autoScale.x && (mx = 0)
+        // @ts-ignore
+        !this.autoScale.y && (my = 0)
       }
-      screenWrapper.value!.style.margin = `${my}px ${mx}px`
-    }
-    const updateScale = () => {
+      screenWrapper.style.margin = `${my}px ${mx}px`
+    },
+    updateScale() {
+      const screenWrapper = this.$refs['screenWrapper'] as HTMLElement
       // 获取真实视口尺寸
       const currentWidth = document.body.clientWidth
       const currentHeight = document.body.clientHeight
       // 获取大屏最终的宽高
-      const realWidth = state.width || state.originalWidth
-      const realHeight = state.height || state.originalHeight
+      const realWidth = this.currentWidth || this.originalWidth
+      const realHeight = this.currentHeight || this.originalHeight
       // 计算缩放比例
       const widthScale = currentWidth / +realWidth
       const heightScale = currentHeight / +realHeight
       // 若要铺满全屏，则按照各自比例缩放
-      if (props.fullScreen){
-        screenWrapper.value!.style.transform = `scale(${widthScale},${heightScale})`
+      if (this.fullScreen) {
+        screenWrapper.style.transform = `scale(${widthScale},${heightScale})`
         return false
       }
       // 按照宽高最小比例进行缩放
       const scale = Math.min(widthScale, heightScale)
-      autoScale(scale)
-    }
+      this.handleAutoScale(scale)
+    },
+    initMutationObserver() {
+      const screenWrapper = this.$refs['screenWrapper'] as HTMLElement
+      const observer = (this.observer = new MutationObserver(() => {
+        this.onResize?.()
+      }))
 
-    const onResize = useDebounceFn(async () => {
-      await initSize()
-      updateSize()
-      updateScale()
-    }, props.delay)
-    const initMutationObserver = () => {
-      useMutationObserver(screenWrapper, () => {
-        onResize()
-      },{
-        attributes:true,
-        attributeFilter:['style'],
-        attributeOldValue:true
+      observer.observe(screenWrapper, {
+        attributes: true,
+        attributeFilter: ['style'],
+        attributeOldValue: true
       })
     }
-    onMounted( () => {
-      nextTick(async() => {
-        await initSize()
-        updateSize()
-        updateScale()
-        useEventListener('resize', onResize)
-        initMutationObserver()
-      })
+  },
+  mounted() {
+    this.onResize = debounce(async () => {
+      await this.initSize()
+      this.updateSize()
+      this.updateScale()
+    }, this.delay)
+    this.$nextTick(async () => {
+      await this.initSize()
+      this.updateSize()
+      this.updateScale()
+      window.addEventListener('resize', this.onResize!)
+      this.initMutationObserver()
     })
-
-
-    return {  screenWrapper }
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize!)
   }
 })
 //
