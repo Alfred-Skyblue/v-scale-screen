@@ -1,5 +1,5 @@
 <!--
- * @Author: 杨攀腾
+ * @Author: ypt
  * @Date: 2022-08-19 20:43:13
  * @Description: 大屏自适应容器组件
 -->
@@ -28,11 +28,11 @@ import {
 
 /**
  * 防抖函数
- * @param {T} fn
+ * @param {Function} fn
  * @param {number} delay
  * @returns {() => void}
  */
-function debounce<T>(fn: T, delay: number): () => void {
+function debounce<T extends Function>(fn: T, delay: number): () => void {
   let timer: NodeJS.Timeout
   return function (...args: any[]): void {
     if (timer) clearTimeout(timer)
