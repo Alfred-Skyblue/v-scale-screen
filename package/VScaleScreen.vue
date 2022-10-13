@@ -32,7 +32,7 @@ import {
  * @param {number} delay
  * @returns {() => void}
  */
-function debounce<T extends Function>(fn: T, delay: number): () => void {
+function debounce(fn: Function, delay: number): () => void {
   let timer: NodeJS.Timeout
   return function (...args: any[]): void {
     if (timer) clearTimeout(timer)
