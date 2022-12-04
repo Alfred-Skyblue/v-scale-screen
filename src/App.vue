@@ -3,7 +3,7 @@ import VScaleScreen from '../package/VScaleScreen.vue'
 </script>
 
 <template>
-  <VScaleScreen>
+  <VScaleScreen full-screen>
     <img src="./assets/img.png" alt="" />
   </VScaleScreen>
 </template>
