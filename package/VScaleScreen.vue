@@ -90,9 +90,14 @@ export default defineComponent({
     wrapperStyle: {
       type: Object as PropType<CSSProperties>,
       default: () => ({})
+    },
+    bodyOverflowHidden: {
+      type: Boolean,
+      default: true
     }
   },
   setup(props) {
+    let bodyOverflowHidden: string
     const state = reactive<IState>({
       width: 0,
       height: 0,
@@ -148,6 +153,12 @@ export default defineComponent({
       })
     }
 
+    function initBodyStyle() {
+      if (props.bodyOverflowHidden) {
+        bodyOverflowHidden = document.body.style.overflow
+        document.body.style.overflow = 'hidden'
+      }
+    }
     /**
      * 更新大屏容器宽高
      */
@@ -212,6 +223,7 @@ export default defineComponent({
       })
     }
     onMounted(() => {
+      initBodyStyle()
       nextTick(async () => {
         await initSize()
         updateSize()
@@ -223,6 +235,9 @@ export default defineComponent({
     onUnmounted(() => {
       window.removeEventListener('resize', onResize)
       state.observer?.disconnect()
+      if (props.bodyOverflowHidden) {
+        document.body.style.overflow = bodyOverflowHidden
+      }
     })
 
     return { screenWrapper, styles }
