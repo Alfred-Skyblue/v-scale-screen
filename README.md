@@ -1,41 +1,32 @@
-
-
 ## v-scale-screen
 
-大屏自适应容器组件，可用于大屏项目开发，实现屏幕自适应，可根据宽度自适应，高度自适应，和宽高等比例自适应，全屏自适应（会存在拉伸问题）
+English | [简体中文](./README.zh_CN.md)
 
-> 注：vue2请使用1.x版本，vue3请使用2.0以上以上版本
+Large-screen adaptive container component, which can be used for large-screen project development, realizes screen adaptation, and can be adaptive according to width, height, and width and height ratios, and full-screen adaptation
 
-+ 版本变更
-> 已修复 vue2.7 不兼容功能，现阶段 v-scale-screen@1.0.2 支持vue2.6.x和vue2.7.x所有版本，vue3 请使用 v-scale-screen@2.0.12 版本
+> Note: Please use version 1.x for vue 2, and version 2.0 or above for vue 3
 
-+ 仓库地址：[github](https://github.com/Alfred-Skyblue/v-scale-screen)
-+ 国内地址：[gitee](https://gitee.com/yuan_fangY/v-scale-screen)
-### 图例
+### Demo
 
 ![图例](./src/assets/scale_screen.gif)
 
-
-
-
-
-
-### 安装
+### Install
 
 ```bash
 npm install v-scale-screen
-# or 
+# or
 yarn add v-scale-screen
 ```
-> 注：vue2请使用1.x版本、vue2请使用1.x版本、vue2请使用1.x版本，重要的事情说三遍
+
+> Note: Please use version 1.x for vue 2, version 1.x for vue 2, version 1.x for vue 2, and important things to say three times
 
 #### vue2
 
+In vue2, we use plugin export, so we need Vue.use() to register
 
-在vue2中我们使用插件方式导出，故而需要 Vue.use() 进行注册
 ```js
 // main.js
-import Vue from "vue";
+import Vue from 'vue'
 import VScaleScreen from 'v-scale-screen'
 
 Vue.use(VScaleScreen)
@@ -54,13 +45,13 @@ Vue.use(VScaleScreen)
   </v-scale-screen>
 </template>
 ```
-> 注：使用时请将 `body` 样式设置为 `overflow: hidden;`
-> 注：使用时请将 `body` 样式设置为 `overflow: hidden;`
-> 注：使用时请将 `body` 样式设置为 `overflow: hidden;`
+
+> Note: Please set `body` style to `overflow: hidden;` when using
 
 #### Vue3
 
-我们在vue3中以组件方式导出
+We export as components in vue 3
+
 ```vue
 <template>
   <v-scale-screen width="1920" height="1080">
@@ -75,27 +66,27 @@ Vue.use(VScaleScreen)
 </template>
 
 <script>
-import { defineComponent } from "vue"
+import { defineComponent } from 'vue'
 import VScaleScreen from 'v-scale-screen'
 
 export default defineComponent({
-  name:'Demo',
-  components:{
+  name: 'Demo',
+  components: {
     VScaleScreen
   }
 })
 </script>
 ```
-> 注：使用时请将 `body` 样式设置为 `overflow: hidden;`
-> 注：使用时请将 `body` 样式设置为 `overflow: hidden;`
-> 注：使用时请将 `body` 样式设置为 `overflow: hidden;`
+
 ### API
-| 属性         | 说明                                                                                   | 类型                               | 默认值    |
-|------------|--------------------------------------------------------------------------------------|----------------------------------|--------|
-| width      | 大屏宽度                                                                                 | `Number` or `String`                 | 1920 |
-| height     | 大屏高度                                                                                 | `Number` or `String`    | 1080 |
-| autoScale  | 自适应配置，配置为boolean类型时，为启动或者关闭自适应，配置为对象时，若x为true，x轴产生边距，y为true时，y轴产生边距，启用fullScreen时此配置失效 | Boolean or {x:boolean,y:boolean} | true   |
-| delay      | 窗口变化防抖延迟时间                                                                           | Number                           | 500    |
-| fullScreen | 全屏自适应，启用此配置项时会存在拉伸效果，同时autoScale失效，非必要情况下不建议开启                                       | Boolean                          | false  |
-| boxStyle | 修改容器样式，如居中展示时侧边背景色，符合Vue双向绑定style标准格式                                                | Object                           | null   |
-| wrapperStyle | 修改自适应区域样式，符合Vue双向绑定style标准格式                                                                          | Object                           | null   |
+
+| Property           | Description                                                                                                                                                                                                                                                                                                    | Type                             | Default |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | ------- |
+| width              | Large screen width                                                                                                                                                                                                                                                                                             | `Number` or `String`             | 1920    |
+| height             | Large screen height                                                                                                                                                                                                                                                                                            | `Number` or `String`             | 1080    |
+| autoScale          | Adaptive configuration, when configured as a boolean type, it is to enable or disable the adaptive configuration. When configured as an object, if x is true, the x-axis generates a margin; when y is true, the y-axis generates a margin. This configuration is enabled when the full screen is enabled fail | Boolean or {x:boolean,y:boolean} | true    |
+| delay              | Window resize delay time                                                                                                                                                                                                                                                                                       | Number                           | 500     |
+| fullScreen         | Full-screen self-adaptive, there will be a stretching effect when this configuration item is enabled, and auto Scale will be invalid. It is not recommended to enable it if it is not necessary                                                                                                                | Boolean                          | false   |
+| boxStyle           | Modify the container style, such as the side background color when displaying in the center, conforming to the Vue two-way binding style standard format                                                                                                                                                       | Object                           | null    |
+| wrapperStyle       | Modify the adaptive area style to conform to the Vue two-way binding style standard format                                                                                                                                                                                                                     | Object                           | null    |
+| bodyOverflowHidden | After enabling, the body style will be automatically set to `overflow: hidden`                                                                                                                                                                                                                                 | Boolean                          | true    |
