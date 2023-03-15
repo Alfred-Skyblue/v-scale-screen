@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import VScaleScreen from '../package/VScaleScreen.vue'
+import VScaleScreen from '../package/component'
 </script>
 
 <template>
-  <VScaleScreen full-screen>
+  <VScaleScreen>
     <img src="./assets/img.png" alt="" />
   </VScaleScreen>
 </template>

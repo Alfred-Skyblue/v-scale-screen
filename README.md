@@ -4,7 +4,7 @@ English | [简体中文](./README.zh_CN.md)
 
 Large-screen adaptive container component, which can be used for large-screen project development, realizes screen adaptation, and can be adaptive according to width, height, and width and height ratios, and full-screen adaptation
 
-> Note: Please use version 1.x for vue 2, and version 2.0 or above for vue 3
+> In version 2.2.0 +, we support both vue > = v3 or > = 2.7, if your project is vue 2.6 version below, then use 1 x version
 
 ### Demo
 
@@ -18,9 +18,10 @@ npm install v-scale-screen
 yarn add v-scale-screen
 ```
 
-> Note: Please use version 1.x for vue 2, version 1.x for vue 2, version 1.x for vue 2, and important things to say three times
 
-#### vue2
+
+#### vue2.6 version
+
 
 In vue2, we use plugin export, so we need Vue.use() to register
 
@@ -48,7 +49,7 @@ Vue.use(VScaleScreen)
 
 > Note: Please set `body` style to `overflow: hidden;` when using
 
-#### Vue3
+#### Vue3 or Vue2.7 version
 
 We export as components in vue 3
 

@@ -2,11 +2,8 @@
 
 大屏自适应容器组件，可用于大屏项目开发，实现屏幕自适应，可根据宽度自适应，高度自适应，和宽高等比例自适应，全屏自适应（会存在拉伸问题）
 
-> 注：vue2 请使用 1.x 版本，vue3 请使用 2.0 以上以上版本
+> 在 2.2.0 以上的版本中，我们同时支持 Vue>=v3或 Vue >=2.7，如果你的项目是vue2.6版本以下，那么使用1.x版本
 
-- 版本变更
-
-  > 已修复 vue2.7 不兼容功能，现阶段 v-scale-screen@1.0.2 支持 vue2.6.x 和 vue2.7.x 所有版本，vue3 请使用 v-scale-screen@2.0.12 版本
 
 - 仓库地址：[github](https://github.com/Alfred-Skyblue/v-scale-screen)
 - 国内地址：[gitee](https://gitee.com/yuan_fangY/v-scale-screen)
@@ -23,9 +20,8 @@ npm install v-scale-screen
 yarn add v-scale-screen
 ```
 
-> 注：vue2 请使用 1.x 版本、vue2 请使用 1.x 版本、vue2 请使用 1.x 版本，重要的事情说三遍
 
-#### vue2
+#### vue2.6 版本
 
 在 vue2 中我们使用插件方式导出，故而需要 Vue.use() 进行注册
 
@@ -51,11 +47,8 @@ Vue.use(VScaleScreen)
 </template>
 ```
 
-> 注：使用时请将 `body` 样式设置为 `overflow: hidden;`
-> 注：使用时请将 `body` 样式设置为 `overflow: hidden;`
-> 注：使用时请将 `body` 样式设置为 `overflow: hidden;`
 
-#### Vue3
+#### Vue3 or Vue2.7 版本
 
 // body 默认样式 overflow: hidden;
 我们在 vue3 中以组件方式导出

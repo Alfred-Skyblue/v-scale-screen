@@ -1,23 +1,7 @@
-<!--
- * @Author: ypt
- * @Date: 2022-08-19 20:43:13
- * @Description: 大屏自适应容器组件
--->
-<template>
-  <section :style="{ ...styles.box, ...boxStyle }" class="v-screen-box">
-    <div
-      :style="{ ...styles.wrapper, ...wrapperStyle }"
-      class="screen-wrapper"
-      ref="screenWrapper"
-    >
-      <slot></slot>
-    </div>
-  </section>
-</template>
-<script lang="ts">
 import {
   CSSProperties,
   defineComponent,
+  h,
   nextTick,
   onMounted,
   onUnmounted,
@@ -96,7 +80,7 @@ export default defineComponent({
       default: true
     }
   },
-  setup(props) {
+  setup(props, { slots }) {
     let bodyOverflowHidden: string
     const state = reactive<IState>({
       width: 0,
@@ -125,7 +109,7 @@ export default defineComponent({
       }
     }
 
-    const screenWrapper = ref<HTMLElement>()
+    const el = ref<HTMLElement>()
     /**
      * 初始化大屏容器宽高
      */
@@ -137,8 +121,8 @@ export default defineComponent({
             state.width = props.width
             state.height = props.height
           } else {
-            state.width = screenWrapper.value?.clientWidth
-            state.height = screenWrapper.value?.clientHeight
+            state.width = el.value?.clientWidth
+            state.height = el.value?.clientHeight
           }
           // endregion
 
@@ -164,28 +148,28 @@ export default defineComponent({
      */
     const updateSize = () => {
       if (state.width && state.height) {
-        screenWrapper.value!.style.width = `${state.width}px`
-        screenWrapper.value!.style.height = `${state.height}px`
+        el.value!.style.width = `${state.width}px`
+        el.value!.style.height = `${state.height}px`
       } else {
-        screenWrapper.value!.style.width = `${state.originalWidth}px`
-        screenWrapper.value!.style.height = `${state.originalHeight}px`
+        el.value!.style.width = `${state.originalWidth}px`
+        el.value!.style.height = `${state.originalHeight}px`
       }
     }
 
     const autoScale = (scale: number) => {
       if (!props.autoScale) return
-      const domWidth = screenWrapper.value!.clientWidth
-      const domHeight = screenWrapper.value!.clientHeight
+      const domWidth = el.value!.clientWidth
+      const domHeight = el.value!.clientHeight
       const currentWidth = document.body.clientWidth
       const currentHeight = document.body.clientHeight
-      screenWrapper.value!.style.transform = `scale(${scale},${scale})`
+      el.value!.style.transform = `scale(${scale},${scale})`
       let mx = Math.max((currentWidth - domWidth * scale) / 2, 0)
       let my = Math.max((currentHeight - domHeight * scale) / 2, 0)
       if (typeof props.autoScale === 'object') {
         !props.autoScale.x && (mx = 0)
         !props.autoScale.y && (my = 0)
       }
-      screenWrapper.value!.style.margin = `${my}px ${mx}px`
+      el.value!.style.margin = `${my}px ${mx}px`
     }
     const updateScale = () => {
       // 获取真实视口尺寸
@@ -199,7 +183,7 @@ export default defineComponent({
       const heightScale = currentHeight / +realHeight
       // 若要铺满全屏，则按照各自比例缩放
       if (props.fullScreen) {
-        screenWrapper.value!.style.transform = `scale(${widthScale},${heightScale})`
+        el.value!.style.transform = `scale(${widthScale},${heightScale})`
         return false
       }
       // 按照宽高最小比例进行缩放
@@ -216,7 +200,7 @@ export default defineComponent({
       const observer = (state.observer = new MutationObserver(() => {
         onResize()
       }))
-      observer.observe(screenWrapper.value!, {
+      observer.observe(el.value!, {
         attributes: true,
         attributeFilter: ['style'],
         attributeOldValue: true
@@ -240,7 +224,25 @@ export default defineComponent({
       }
     })
 
-    return { screenWrapper, styles }
+    return () => {
+      return h(
+        'div',
+        {
+          className: 'v-screen-box',
+          style: { ...styles.box, ...props.boxStyle }
+        },
+        [
+          h(
+            'div',
+            {
+              className: 'screen-wrapper',
+              style: { ...styles.wrapper, ...props.wrapperStyle },
+              ref: el
+            },
+            slots.default?.()
+          )
+        ]
+      )
+    }
   }
 })
-</script>
