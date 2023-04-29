@@ -94,7 +94,7 @@ export default defineComponent({
       box: {
         overflow: 'hidden',
         backgroundSize: `100% 100%`,
-        background: `#000`,
+        backgroundColor: `#000`,
         width: `100vw`,
         height: `100vh`
       },

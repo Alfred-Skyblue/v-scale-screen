@@ -1,5 +1,7 @@
 ## v-scale-screen
 
+If you are using React, move to [r-scale-screen](https://github.com/Alfred-Skyblue/r-scale-screen)
+
 English | [简体中文](./README.zh_CN.md)
 
 Large-screen adaptive container component, which can be used for large-screen project development, realizes screen adaptation, and can be adaptive according to width, height, and width and height ratios, and full-screen adaptation

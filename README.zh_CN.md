@@ -1,5 +1,7 @@
 ## v-scale-screen
 
+如果您是Vue开发者，请移步 [r-scale-screen](https://github.com/Alfred-Skyblue/r-scale-screen)
+
 大屏自适应容器组件，可用于大屏项目开发，实现屏幕自适应，可根据宽度自适应，高度自适应，和宽高等比例自适应，全屏自适应（会存在拉伸问题）
 
 > 在 2.2.0 以上的版本中，我们同时支持 Vue>=v3或 Vue >=2.7，如果你的项目是vue2.6版本以下，那么使用1.x版本

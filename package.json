@@ -2,6 +2,7 @@
   "name": "v-scale-screen",
   "private": false,
   "version": "2.2.0",
+  "description": "vue3大屏自适应组件",
   "author": {
     "name": "ypt",
     "email": "yangpanteng@gmail.com"
