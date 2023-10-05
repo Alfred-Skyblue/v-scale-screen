@@ -225,23 +225,16 @@ export default defineComponent({
     })
 
     return () => {
-      return h(
-        'div',
-        {
-          className: 'v-screen-box',
-          style: { ...styles.box, ...props.boxStyle }
-        },
-        [
-          h(
-            'div',
-            {
-              className: 'screen-wrapper',
-              style: { ...styles.wrapper, ...props.wrapperStyle },
-              ref: el
-            },
-            slots.default?.()
-          )
-        ]
+      return (
+        <div class="v-screen-box" style={{ ...styles.box, ...props.boxStyle }}>
+          <div
+            ref={el}
+            class="screen-wrapper"
+            style={{ ...styles.wrapper, ...props.wrapperStyle }}
+          >
+            {slots.default?.()}
+          </div>
+        </div>
       )
     }
   }

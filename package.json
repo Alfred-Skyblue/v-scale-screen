@@ -39,6 +39,7 @@
     "url": "https://github.com/Alfred-Skyblue/v-scale-screen"
   },
   "dependencies": {
+    "@vitejs/plugin-vue-jsx": "^3.0.2",
     "vue": "^3.2.37"
   },
   "peerDependencies": {
