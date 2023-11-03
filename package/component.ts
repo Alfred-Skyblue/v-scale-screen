@@ -211,7 +211,10 @@ export default defineComponent({
       initBodyStyle()
       nextTick(async () => {
         await initSize()
-        el.value.addEventListener("transitionend", (e) => emit('transitionend', e))
+        el.value.addEventListener("transitionend", (e) => {
+          if (e.currentTarget !== e.target) return
+          emit('transitionend', e)
+        })
         updateSize()
         updateScale()
         window.addEventListener('resize', onResize)
