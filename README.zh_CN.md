@@ -97,3 +97,7 @@ export default defineComponent({
 | boxStyle           | 修改容器样式，如居中展示时侧边背景色，符合 Vue 双向绑定 style 标准格式                                                          | Object                           | null  |
 | wrapperStyle       | 修改自适应区域样式，符合 Vue 双向绑定 style 标准格式                                                                   | Object                           | null  |
 | bodyOverflowHidden | 启用后body的样式会自动设置为 `overflow: hidden`                                                                  | Boolean                          | true  |
+
+| Event         | Desctiption                 | Params  |
+| ------------- | ----------------------------| ------- |
+| transitionend | 自适应区域结束 transition 时   | Element |
