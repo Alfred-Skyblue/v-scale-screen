@@ -93,3 +93,7 @@ export default defineComponent({
 | boxStyle           | Modify the container style, such as the side background color when displaying in the center, conforming to the Vue two-way binding style standard format                                                                                                                                                       | Object                           | null    |
 | wrapperStyle       | Modify the adaptive area style to conform to the Vue two-way binding style standard format                                                                                                                                                                                                                     | Object                           | null    |
 | bodyOverflowHidden | After enabling, the body style will be automatically set to `overflow: hidden`                                                                                                                                                                                                                                 | Boolean                          | true    |
+
+| Event         | Desctiption                 | Params  |
+| ------------- | ----------------------------| ------- |
+| transitionend | after wrapper transitionend | Element |

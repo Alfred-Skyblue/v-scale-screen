@@ -80,7 +80,8 @@ export default defineComponent({
       default: true
     }
   },
-  setup(props, { slots }) {
+  emits: ['transitionend'],
+  setup(props, { slots, emit }) {
     let bodyOverflowHidden: string
     const state = reactive<IState>({
       width: 0,
@@ -210,6 +211,10 @@ export default defineComponent({
       initBodyStyle()
       nextTick(async () => {
         await initSize()
+        el.value.addEventListener("transitionend", (e) => {
+          if (e.currentTarget !== e.target) return
+          emit('transitionend', e)
+        })
         updateSize()
         updateScale()
         window.addEventListener('resize', onResize)
