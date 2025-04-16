@@ -79,6 +79,10 @@ export default defineComponent({
     bodyOverflowHidden: {
       type: Boolean,
       default: true
+    },
+    target: {
+      type: String,
+      default: null
     }
   },
   setup(props, { slots }) {
@@ -161,8 +165,9 @@ export default defineComponent({
       if (!props.autoScale) return
       const domWidth = el.value!.clientWidth
       const domHeight = el.value!.clientHeight
-      const currentWidth = document.body.clientWidth
-      const currentHeight = document.body.clientHeight
+      const targetElement = props.target ? document.querySelector(props.target) : document.body
+      const currentWidth = targetElement.clientWidth
+      const currentHeight = targetElement.clientHeight
       el.value!.style.transform = `scale(${scale},${scale})`
       let mx = Math.max((currentWidth - domWidth * scale) / 2, 0)
       let my = Math.max((currentHeight - domHeight * scale) / 2, 0)
@@ -174,8 +179,9 @@ export default defineComponent({
     }
     const updateScale = () => {
       // 获取真实视口尺寸
-      const currentWidth = document.body.clientWidth
-      const currentHeight = document.body.clientHeight
+      const targetElement = props.target ? document.querySelector(props.target) : document.body
+      const currentWidth = targetElement.clientWidth
+      const currentHeight = targetElement.clientHeight
       // 获取大屏最终的宽高
       const realWidth = state.width || state.originalWidth
       const realHeight = state.height || state.originalHeight
