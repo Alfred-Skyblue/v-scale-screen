@@ -157,6 +157,10 @@ export default defineComponent({
       }
     }
 
+    /**
+     * 自适应缩放
+     * @param scale
+     */
     const autoScale = (scale: number) => {
       if (!props.autoScale) return
       const domWidth = el.value!.clientWidth
